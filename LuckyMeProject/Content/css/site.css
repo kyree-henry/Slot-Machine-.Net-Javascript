@@ -1,0 +1,47 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.navbar-light {
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.doors {
+    display: flex;
+}
+
+.door {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.boxes {
+    transition: transform 1s ease-in-out;
+}
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    width: 200px;
+    height: 200px;
+}

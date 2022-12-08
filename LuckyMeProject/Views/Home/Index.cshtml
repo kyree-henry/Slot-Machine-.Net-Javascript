@@ -1,0 +1,10 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div id="loadspin">
+    @if (Session["UserId"] != null)
+    {
+        @Html.Partial("_Spin", (LuckyMeProject.Models.Player)ViewBag.Data)
+    }
+</div>
