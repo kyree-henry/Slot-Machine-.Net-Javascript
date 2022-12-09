@@ -143,12 +143,8 @@ main.reset = function reset(firstInit = true, groups = 1, duration = 1) {
                     this.querySelectorAll('.box').forEach((box, index) => {
                         box.style.filter = 'blur(0)';
                         if (index > 0) this.removeChild(box);
-
-                        if (index == (arr.length - 1)) {
-                        }
                     });
                   
-                    //console.log(main.spinresult)
                 },
                 { once: true }
             );
