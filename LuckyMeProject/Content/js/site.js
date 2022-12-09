@@ -1,6 +1,5 @@
 ﻿main = {};
 main.default = '/Content/img/0.jpg';
-main.spinresult = []
 main.items = [
     '/Content/img/1.jpg',
     '/Content/img/2.jpg',
@@ -121,8 +120,6 @@ main.reset = function reset(firstInit = true, groups = 1, duration = 1) {
 
         if (!firstInit) {
 
-            main.spinresult = [];
-
             const arr = [];
             for (let n = 0; n < (groups > 0 ? groups : 1); n++) {
                 arr.push(...main.items);
@@ -177,7 +174,7 @@ main.reset = function reset(firstInit = true, groups = 1, duration = 1) {
 main.spin = async function Spin()
 {
     main.reset(false, 1, 2);
-    //$(".dss").attr("disabled", true);
+    $(".dss").attr("disabled", true);
     let credit = $("#bet").val();
 
     if (credit == '') {
@@ -191,6 +188,14 @@ main.spin = async function Spin()
         $(".dss").attr("disabled", false);
 
     } else {
+
+        let balance = $("#credit").val();
+
+        if (credit > balance) {
+            alert("You do not have enough credit to complete this transcation");
+            $(".dss").attr("disabled", false);
+            return;
+        }
 
         let doors = document.querySelectorAll('.door');
 
@@ -216,20 +221,24 @@ main.spin = async function Spin()
         data.Slot2 = values[1];
         data.Slot3 = values[2];
 
-        console.log(data);
-        return;
-
-        $.post('/home/Payout', { data, credit     },
+        $.post('/home/Payout', { data, credit },
             function (result) {
-                if (!result.haserror) {
-                    alert(result.error);
-                    $(".btns").attr("disabled", false);
-                } else {
-                    alert(result.message);
-                    main.loadPage('login', 'loadAuth');
-                    main.loadPage('spin', 'loadspin');
-                    //    init();
+                if (result.won)
+                {
+                    $("#extracredit").addClass("text-success");
+                    $("#extracredit").removeClass("text-success");
+                    $("#wins").val(result.Wins);
                 }
+                else {
+                    $("#extracredit").removeClass("text-success");
+                    $("#extracredit").addClass("text-success");
+
+                }
+
+                $("#credit").val(result.Credits);
+
+                $("#extracredit").val(result.creditadded);
+                $(".dss").attr("disabled", false);
             }
         );
 
@@ -246,9 +255,5 @@ main.shuffle = function Shuffle([...arr]) {
     return arr;
 }
 
-main.postspinresult = function postspinresult()
-{
-
-}
 
 

@@ -105,44 +105,59 @@ namespace LuckyMeProject.Controllers
 			var playerInfo = await _dbContext.Players.SingleOrDefaultAsync(a => a.Id == userid);
 
 			bool won = false;
+			int creditadded = 0;
 
-		    if (data.Slot1 == "1.jpg" && data.Slot2 == "1.jpg" && data.Slot3 == "1.jpg")
+
+			if (data.Slot1 == "1.jpg" && data.Slot2 == "1.jpg" && data.Slot3 == "1.jpg")
 			{
 				playerInfo.Credits += 10;
 				playerInfo.Wins += 2;
+				creditadded = 10;
+				won = true;
 
-			}else if (data.Slot1 == "2 .jpg" && data.Slot2 == "2.jpg" && data.Slot3 == "2.jpg")
+			}
+			else if (data.Slot1 == "2 .jpg" && data.Slot2 == "2.jpg" && data.Slot3 == "2.jpg")
 			{
 				playerInfo.Credits += 10;
 				playerInfo.Wins += 2;
+				creditadded = 10;
+				won = true;
 
 			}else if (data.Slot1 == "3.jpg" && data.Slot2 == "3.jpg" && data.Slot3 == "3.jpg")
 			{
 				playerInfo.Credits += 10;
 				playerInfo.Wins += 1;
+				creditadded = 10;
+				won = true;
 			}
 			else if(data.Slot1 != null && data.Slot2 == "1.jpg" && data.Slot3 == "1.jpg")
 			{
 				playerInfo.Credits += 2;
 				playerInfo.Wins += 1;
+				creditadded = 2;
+				won = true;
 
 			}else if (data.Slot1 != null && data.Slot2 == "2.jpg" && data.Slot3 == "2.jpg")
 			{
 				playerInfo.Credits += 2;
 				playerInfo.Wins += 1;
+				won = true;
 			}
 			else if (data.Slot1 != null && data.Slot2 == "3.jpg" && data.Slot3 == "3.jpg")
 			{
 				playerInfo.Credits += 2;
 				playerInfo.Wins += 1;
+				creditadded = 2;
+				won = true;
 			}
 			else
 			{
 				playerInfo.Credits -= credit;
+				creditadded = -credit;
 			}
 
 			await _dbContext.SaveChangesAsync();
-			return Json(new { won,  });
+			return Json(new { won, playerInfo.Credits, creditadded, playerInfo.Wins });
 		}
 		
 		[HttpGet]
