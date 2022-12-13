@@ -21,7 +21,7 @@
         <div class="col-4 d-flex">
             <label class="col-auto col-form-label">Bet</label>
             <div class="col mx-4">
-                <input type="number" value="1" id="bet" class="form-control dss">
+                <asp:TextBox runat="server" type="number" Text="1" ID="bet" CssClass="form-control dss" />
             </div>
         </div>
 
@@ -30,6 +30,13 @@
             <div class="col mx-3">
                 <asp:TextBox runat="server" TextMode="SingleLine" ReadOnly="true" ID="wins" CssClass="form-control" />
             </div>
+        </div>
+
+        <div class="d-none">
+            <asp:TextBox runat="server" TextMode="SingleLine" ID="slot1" />
+            <asp:TextBox runat="server" TextMode="SingleLine" ID="slot2" />
+            <asp:TextBox runat="server" TextMode="SingleLine" ID="slot3" />
+            <asp:Button runat="server" OnClick="Payout" ID="submitpayout" />
         </div>
     </form>
 
@@ -65,8 +72,12 @@
             <button class="dss" onclick="main.spin()">Spin</button>
         </div>
         <div class="col-12 mt-1 d-flex justify-content-center">
-            <span class="mx-2" id="extracredit"></span>
+            <asp:Label CssClass="mx-2" ID="extraCredit"></asp:Label>
         </div>
+
+
+        <%--hidden form --%>
+        
     </div>
 
 </div>

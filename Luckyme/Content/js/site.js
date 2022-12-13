@@ -8,123 +8,6 @@ main.items = [
     'Content/img/5.jpg',
 ]
 
-main.loadPage = function Loadpage(pageType, containerId)
-{
-    //$(`#${containerId}`).load(`${pageType}.ascx`);
-    $.ajax({
-        type: "POST",
-        url: "Default.aspx/LoadPage",
-        data: "",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (result) {
-            console.log(result.d);
-            $(`#${containerId}`).children().remove();
-            $(`#${containerId}`).append(result.d);
-        }
-    });
-}
-
-main.register = function Register() {
-    let username = $("#rg_username").val();
-    let password = $("#rg_password").val();
-    let confirmpassword = $("#rg_confirmpassword").val();
-
-    let errorList = $("#errors ul");
-    errorList.children().remove();
-
-    let isvalid = true;
-
-    if (username == '') {
-        isvalid = false;
-        errorList.append("<li>Username field is required!</li>");
-    }
-
-    if (password != '')
-    {
-        if (password != confirmpassword)
-        {
-            isvalid = false;
-            errorList.append("<li>Password do not match!</li>");
-        }
-    } else
-    {
-        isvalid = false;
-        errorList.append("<li>Password field is required!</li>");
-    }
-
-
-    if (!isvalid) return;
-
-    let model = new Object();
-    model.UserName = username;
-    model.password = password;
-
-    $.post('/home/register', { model },
-        function (result) {
-            if (result.haserror) {
-                alert(result.error);
-
-            } else {
-                alert(result.message);
-                main.loadPage('login', 'loadAuth')
-            }
-        }
-    );
-}
-
-main.login = function Login() {
-
-    let username = $("#lg_username").val();
-    let password = $("#lg_password").val(); 
-    let errorList = $("#errors ul");
-    errorList.children().remove();
-
-    let isvalid = true;
-
-    $(".btns").attr("disabled", true);
-
-    if (username == '') {
-        isvalid = false;
-        errorList.append("<li>Username field is required!</li>");
-    }
-
-    if (password == '') {
-        isvalid = false;
-        errorList.append("<li>Password field is required!</li>");
-    }
-
-    if (!isvalid) {
-        $(".btns").attr("disabled", false);
-        return;
-    }
-
-    let model = new Object();
-    model.UserName = username;
-    model.password = password;
-
-    $.post('/home/login', { model },
-        function (result) {
-            if (result.haserror) {
-                alert(result.error);
-                $(".btns").attr("disabled", false);
-            } else {
-                alert(result.message);
-                main.loadPage('login', 'loadAuth');
-                main.loadPage('spin', 'loadspin');
-            //    init();
-            }
-        }
-    );
-}
-
-main.addcredit = function AddCredit()
-{
-    $.get('/home/addcredit', function (data) {
-         $("#credit").val(data);
-    });
-}
-
 main.reset = function reset(firstInit = true, groups = 1, duration = 1) {
     let doors = document.querySelectorAll('.door');
     for (const door of doors) {
@@ -230,32 +113,11 @@ main.spin = async function Spin()
         }
 
         let values = await erw();
-        let data = new Object();
-        data.Slot1 = values[0];
-        data.Slot2 = values[1];
-        data.Slot3 = values[2];
+        $("#spin_slot1").val(values[0]);
+        $("#spin_slot1").val(values[1]);
+        $("#spin_slot1").val(values[3]);
 
-        $.post('/home/Payout', { data, credit },
-            function (result) {
-                if (result.won)
-                {
-                    $("#extracredit").addClass("text-success");
-                    $("#extracredit").removeClass("text-success");
-                    $("#wins").val(result.Wins);
-                }
-                else {
-                    $("#extracredit").removeClass("text-success");
-                    $("#extracredit").addClass("text-success");
-
-                }
-
-                $("#credit").val(result.Credits);
-
-                $("#extracredit").val(result.creditadded);
-                $(".dss").attr("disabled", false);
-            }
-        );
-
+        $("#spin_submitpayout").click();
     }    
 }
 
