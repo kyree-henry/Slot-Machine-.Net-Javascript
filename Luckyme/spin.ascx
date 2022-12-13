@@ -8,7 +8,7 @@
         </div>
 
         <div class="col-12 mt-4 mb-5 d-flex justify-content-center">
-            <button onclick="main.addcredit()" class="mx-2 dss">+5 Credit</button>
+            <asp:Button runat="server" OnClick="AddCredit" CssClass="mx-2 dss" Text="+5 Credit" />
         </div>
 
         <div class="col-4 d-flex">

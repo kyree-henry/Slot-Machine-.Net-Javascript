@@ -3,6 +3,8 @@ using System.IO;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web;
+using System.Data.SqlClient;
+using System.Web.Configuration;
 
 namespace Luckyme
 {
@@ -10,8 +12,8 @@ namespace Luckyme
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-
-		}
+			
+        }
 
 		
 		[WebMethod]

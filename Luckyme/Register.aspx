@@ -22,28 +22,14 @@
         <ul class="text-danger"></ul>
     </div>
 
-
     <div id="loadAuth"> 
         <% if (Session["userId"] == null) { %>
 
-                <%@ Register Src="~/login.ascx" TagName="WebControl" TagPrefix="auth"%>
+                <%@ Register Src="~/register.ascx" TagName="WebControl" TagPrefix="auth"%>
                 <auth:WebControl ID="auth" runat="server" /> 
         <% } %>
         
     </div>
-
-    
-    <div class="container body-content" id="loadspin">
-        <% if (Session["userId"] != null) { %>
-            <%@ Register Src="~/spin.ascx" TagName="WebControl2" TagPrefix="spin"%>
-                <spin:WebControl2 ID="spin" runat="server" /> 
-        <% } %>
-    </div>
-
-
-    <script src="Content/lib/jquery/dist/jquery.min.js"></script>
-    <script src="Content/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="Content/js/site.js"></script>
-  
+    W
 </body>
 </html>
