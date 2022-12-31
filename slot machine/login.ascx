@@ -1,31 +1,29 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="login.ascx.cs" Inherits="slot_machine.login" %>
  <div class="container">
-    <form runat="server" class="row justify-content-center">
+    <div class="row justify-content-center">
 
         <div class="d-flex justify-content-center">
-            <asp:ValidationSummary CssClass="text-danger" ValidationGroup="login" ID="validatesummary" runat="server" />
-            <asp:CustomValidator ValidationGroup="login" Display="None" runat="server" ID="error" />
+            <ul id="errors" class="text-danger"></ul>
         </div>
 
         <div class="col-12 mb-4 col-md-4 d-flex">
             <label class="col-auto col-form-label">Username</label>
             <div class="col mx-3">
-                <asp:TextBox runat="server" ValidationGroup="login" TextMode="SingleLine" ID="username" CssClass="form-control" />
-                <asp:RequiredFieldValidator ValidationGroup="login" runat="server" ControlToValidate="username" CssClass="text-danger" ErrorMessage="Username field is required!" />
+                <input type="text" id="username" class="form-control">
             </div>
         </div>
 
         <div class="col-12 mb-4 col-md-4 d-flex">
             <label class="col-auto col-form-label">Password</label>
             <div class="col mx-3">
-                <asp:TextBox runat="server" ValidationGroup="login" TextMode="Password" ID="password" CssClass="form-control" placeholder="*****" />
-                <asp:RequiredFieldValidator ValidationGroup="login" runat="server" ControlToValidate="password" CssClass="text-danger" ErrorMessage="Password field is required!" />
+                <input type="password" id="password" class="form-control" placeholder="*****">
             </div>
         </div>
 
-        <div class="col-12 d-flex justify-content-center">
-            <asp:Button runat="server" ValidationGroup="login" OnClick="SubmitForm" CssClass="mx-2 btns" Text="Login" />
-            <asp:Button runat="server" OnClick="GotoRegister" CssClass="mx-2 btns" Text="Register" />
-        </div>
-    </form>
+       <div class="col-12 d-flex justify-content-center">
+           <button onclick="cs.login()" class="mx-2 networkactivity">Login</button>
+           <button onclick="cs.loadPage('register', 'loadAuth')" class="mx-2 networkactivity">Register</button>
+       </div>
+
+    </div>
 </div>
